@@ -1,0 +1,20 @@
+{
+  "name": "mental-card",
+  "version": "1.0.0",
+  "description": "mental-ward-card-game",
+  "main": "./dist/main.js",
+  "scripts": {
+    "dev": "electron ."
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^28.1.3",
+    "ts-loader": "^9.5.1",
+    "webpack": "^5.89.0"
+  },
+  "devDependencies": {
+    "@types/electron": "^1.6.10",
+    "webpack-cli": "^5.1.4"
+  }
+}
