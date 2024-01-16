@@ -5,7 +5,7 @@ MENTAL CARD
 asd
 
 # card
-![image](./public/assets/defualt-card.png)
+![image](./public/assets/card/back.png) ![image](./public/assets/card/front.png)
 
 ## info
 
