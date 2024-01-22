@@ -13,25 +13,20 @@ canvas.style.height = `${window.innerHeight}px`
 canvas.width = window.innerWidth * dpr
 canvas.height = window.innerHeight * dpr
 
-const deck = document.getElementById("player-deck")!
-const cardInfo = {
-    name: "loti",
-    attack: 10,
-    defence: 10,
-    health: 10
-}
-const card = new Card(cardInfo)
+
 const player = new Player("tester")
 const opponent = new Opponent()
 
-deck.addEventListener('click', () => {
-    if(player.hand.size < 10 && player.deck.size > 0) {
-        player.drawCard()
-    }
-})
-
-for(let i = 0; i < 30; i++) {
-    player.addToDeck(card)
+for(let i = 0; i < 5; i++) {
+    player.addToDeck(
+        new Card({
+            uid: player.deck.size,
+            name: "loti",
+            attack: 10,
+            defence: 10,
+            health: 10
+        })
+    )
 }
 
 const game = new Game(5, {
@@ -43,7 +38,8 @@ Loader.loadAll([
     "../public/assets/deck-zone.png",
     "../public/assets/card-zoneX3.png",
     "../public/assets/card-zoneX4.png",
-    "../public/assets/card-zoneX5.png"
+    "../public/assets/card-zoneX5.png",
+    "../public/assets/card/frontX4.png"
 ]).then(() => {
     game.start()
 })

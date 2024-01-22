@@ -40,7 +40,7 @@ body {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .card {
-    transition: transform .2s , left .2s;
+    transition: transform .2s, left .2s;
     position: absolute;
     width: 10%;
 }
@@ -71,4 +71,30 @@ body {
 }
 .hidden {
     visibility: hidden;
+}
+#asd {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-color: #000;
+}
+#bell {
+    width: 13%;
+    position: absolute;
+    top: 47%;
+    left: 50px;
+}
+.bell-hidden {
+    transition: transform .2s;
+    transform: translateY(90px);
+}
+#card-info {
+    padding: 20px;
+    font-size: 1.5rem;
+    border: solid 4px black;
+    height: 40%;
+    width: 20%;
+    position: absolute;
+    top: 5%;
+    right: 2%;
 }
