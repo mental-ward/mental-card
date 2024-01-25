@@ -44,6 +44,22 @@ body {
     position: absolute;
     width: 10%;
 }
+.card-part {
+    position: absolute;
+    width: 100%;
+    height: fit-content;
+}
+.card-part-type {
+    position: absolute;
+    width: 0px;
+    height: fit-content;
+    transform: translate(17px, 28px);
+}
+.card-part-sacrifice {
+    position: absolute;
+    width: 0px;
+    height: fit-content;
+}
 #scenario-container {
     position: fixed;
     width: 100vw;

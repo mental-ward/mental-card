@@ -1,3 +1,4 @@
+import { CanvasCardObject } from "../cardObject/CanvasCardObject"
 import Loader from "../etc/Loader"
 import { Card } from "../objects/Card"
 const canvas = document.getElementById("canvas") as HTMLCanvasElement
@@ -6,27 +7,30 @@ const cardInfoOnField = document.getElementById("card-info-on-field")!
 const body = document.body
 const dpr = window.devicePixelRatio
 const cardZonePath = "../public/assets/card-zoneX4.png"
-const cardImagePath = "../public/assets/card/frontX4.png"
 let imageWidth: number
 let imageHeight: number
 let canSelect = false
 type Axis = {x: number, y:number}
-const monster = new Card({
-    uid: 1,
-    name: "asd",
-    attack: 1,
-    defence: 1,
-    health: 10
+
+const humenCard = new Card({
+    cardID: 1,
+    name: "humen",
+    type: 1,
+    sacrifice: 5,
+    attack: 2,
+    defence: 3,
+    health: 4
 })
 export class Field {
     public isArranging: boolean = false
     public numOfCardZone: number
     private fieldAxis: {opponent: Array<Axis>, player: Array<Axis>} = {opponent: [], player: []}
     public fieldArrange: {opponent: Array<Card|undefined>, player: Array<Card|undefined>} = {
-        opponent: [monster, undefined, monster],
+        opponent: [humenCard],
         player: []
     }
     private selectedCard: Card | undefined
+    private isPlayerTurn: boolean = true
     constructor(numOfCardZone: number) {
         this.numOfCardZone = numOfCardZone
         this.loop = this.loop.bind(this)
@@ -50,22 +54,29 @@ export class Field {
     private renderCard() {
         this.fieldArrange.opponent.forEach((element, index) => {
             if(element) {
-                ctx.drawImage(Loader.get(cardImagePath), this.fieldAxis.opponent[index].x, this.fieldAxis.opponent[index].y)
+                const cco = new CanvasCardObject(element, {x: this.fieldAxis.opponent[index].x, y: this.fieldAxis.opponent[index].y})
+                cco.draw()
             }
         })
         this.fieldArrange.player.forEach((element, index) => {
             if(element) {
-                ctx.drawImage(Loader.get(cardImagePath), this.fieldAxis.player[index].x, this.fieldAxis.player[index].y)
+                const cco = new CanvasCardObject(element, {x: this.fieldAxis.player[index].x, y: this.fieldAxis.player[index].y})
+                cco.draw()
             }
         })
     }
-    public async selectCard(card: Card) {
+    public async selectCard(card: Card, isPlayerTurn: boolean) {
         this.selectedCard = card
         this.isArranging = true
+        this.isPlayerTurn = isPlayerTurn
         canSelect = true
     }
-    public newArrange(card: Card, fieldNum: number) {
-        this.fieldArrange.player[fieldNum] = card
+    public placeCard(card: Card, fieldNum: number, isPlayerTurn: boolean) {
+        if(isPlayerTurn) {
+            this.fieldArrange.player[fieldNum] = card
+        } else {
+            this.fieldArrange.opponent[fieldNum] = card
+        }
         // ctx.drawImage(Loader.get(cardImagePath), this.fieldAxis.player[0].x, this.fieldAxis.player[0].y)
     }
     public kill(entity: number, fieldNum: number) {
@@ -82,7 +93,7 @@ export class Field {
         requestAnimationFrame(this.loop)
     }
     init() {
-        window.addEventListener("mouseup", (e) => {
+        window.addEventListener("click", (e) => {
             if(canSelect) {
                 const mouseX = e.clientX
                 const mouseY = e.clientY
@@ -90,7 +101,7 @@ export class Field {
                     for(let i = 0; i < this.numOfCardZone; i++) {
                         if(mouseX >= this.fieldAxis.player[i].x/dpr && mouseX < (this.fieldAxis.player[i].x+imageWidth)/dpr) {
                             if(mouseY >= this.fieldAxis.player[i].y/dpr && mouseY < (this.fieldAxis.player[i].y+imageHeight)/dpr) {
-                                this.newArrange(this.selectedCard!, i)
+                                this.placeCard(this.selectedCard!, i, this.isPlayerTurn)
                                 canSelect = false
                                 this.isArranging = false
                             }
@@ -110,7 +121,10 @@ export class Field {
                         if(this.fieldArrange.opponent[i]) {
                             const opponent = this.fieldArrange.opponent[i]!
                             cardInfoOnField.innerText = `
+                                cardID: ${opponent.cardID}
                                 name: ${opponent.name}
+                                type: ${opponent.type}
+                                sacrifice: ${opponent.sacrifice}
                                 health: ${opponent.heal}
                                 attack: ${opponent.atk}
                                 defence: ${opponent.def}
@@ -123,7 +137,10 @@ export class Field {
                         if(this.fieldArrange.player[i]) {
                             const player = this.fieldArrange.player[i]!
                             cardInfoOnField.innerText = `
+                                cardID: ${player.cardID}
                                 name: ${player.name}
+                                type: ${player.type}
+                                sacrifice: ${player.sacrifice}
                                 health: ${player.heal}
                                 attack: ${player.atk}
                                 defence: ${player.def}

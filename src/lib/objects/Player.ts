@@ -11,7 +11,7 @@ export class Player {
         this.hand.clear()
     }
     public addToDeck(card: Card) {
-        this.deck.set(this.deck.size, card)
+        this.deck.set(card.cardID, card)
         this.updateDeck()
     }
     public removeToDeck(cardID: number) {
