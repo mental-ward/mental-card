@@ -20,7 +20,7 @@ body {
     display: grid;
     grid-template-columns: 85% 15%;
     place-items: center;
-    transition: bottom .5s;
+    transition: transform .5s;
     border-top: solid 5px #000;
     background-color: #fff;
 }
@@ -47,17 +47,6 @@ body {
 .card-part {
     position: absolute;
     width: 100%;
-    height: fit-content;
-}
-.card-part-type {
-    position: absolute;
-    width: 0px;
-    height: fit-content;
-    transform: translate(17px, 28px);
-}
-.card-part-sacrifice {
-    position: absolute;
-    width: 0px;
     height: fit-content;
 }
 #scenario-container {
@@ -99,10 +88,13 @@ body {
     position: absolute;
     top: 47%;
     left: 50px;
+    transition: transform .5s;
 }
-.bell-hidden {
-    transition: transform .2s;
+.bell-pushed {
     transform: translateY(90px);
+}
+.bell-up {
+    transform: translateY(0px);
 }
 #card-info {
     padding: 20px;
@@ -113,4 +105,5 @@ body {
     position: absolute;
     top: 5%;
     right: 2%;
+    transition: transform .5s;
 }

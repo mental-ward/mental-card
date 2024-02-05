@@ -1,6 +1,9 @@
 import { CanvasCardObject } from "../cardObject/CanvasCardObject"
 import Loader from "../etc/Loader"
 import { Card } from "../objects/Card"
+
+import { bird } from "../../cardData/Bird.json"
+
 const canvas = document.getElementById("canvas") as HTMLCanvasElement
 const ctx = canvas.getContext("2d") as CanvasRenderingContext2D
 const cardInfoOnField = document.getElementById("card-info-on-field")!
@@ -9,27 +12,24 @@ const dpr = window.devicePixelRatio
 const cardZonePath = "../public/assets/card-zoneX4.png"
 let imageWidth: number
 let imageHeight: number
-let canSelect = false
 type Axis = {x: number, y:number}
 
-const humenCard = new Card({
-    cardID: 1,
-    name: "humen",
-    type: 1,
-    sacrifice: 5,
-    attack: 2,
-    defence: 3,
-    health: 4
-})
 export class Field {
+    public isOn = false
     public isArranging: boolean = false
+    public isSacrificing: boolean = false
     public numOfCardZone: number
     private fieldAxis: {opponent: Array<Axis>, player: Array<Axis>} = {opponent: [], player: []}
     public fieldArrange: {opponent: Array<Card|undefined>, player: Array<Card|undefined>} = {
-        opponent: [humenCard],
+        opponent: [],
         player: []
     }
+    public canvasCardObjects = {
+        opponent: new Map<number, CanvasCardObject>(), 
+        player: new Map<number, CanvasCardObject>()
+    }
     private selectedCard: Card | undefined
+    private selectedSacrificeCard: Array<number> = []
     private isPlayerTurn: boolean = true
     constructor(numOfCardZone: number) {
         this.numOfCardZone = numOfCardZone
@@ -42,74 +42,113 @@ export class Field {
             for(let n = 0; n < this.numOfCardZone; n++) {
                 const dx = left + ((imageWidth - 4) * n)
                 const dy = top + ((imageHeight - 4) * i)
-                if(i === 0) {
-                    this.fieldAxis.opponent.push({x: dx, y: dy})
-                } else {
-                    this.fieldAxis.player.push({x: dx, y: dy})
-                }
                 ctx.drawImage(Loader.get(cardZonePath), dx, dy)
             }    
         }
     }
     private renderCard() {
-        this.fieldArrange.opponent.forEach((element, index) => {
-            if(element) {
-                const cco = new CanvasCardObject(element, {x: this.fieldAxis.opponent[index].x, y: this.fieldAxis.opponent[index].y})
-                cco.draw()
-            }
+        this.canvasCardObjects.opponent.forEach((element) => {
+            element.draw()
+            element.rander()
         })
-        this.fieldArrange.player.forEach((element, index) => {
-            if(element) {
-                const cco = new CanvasCardObject(element, {x: this.fieldAxis.player[index].x, y: this.fieldAxis.player[index].y})
-                cco.draw()
-            }
+        this.canvasCardObjects.player.forEach((element) => {
+            element.draw()
+            element.rander()
         })
     }
+    
     public async selectCard(card: Card, isPlayerTurn: boolean) {
         this.selectedCard = card
-        this.isArranging = true
+        if(card.sacrifice.length < 1) {
+            this.isArranging = true
+        } else {
+            this.isSacrificing = true
+        }
         this.isPlayerTurn = isPlayerTurn
-        canSelect = true
     }
     public placeCard(card: Card, fieldNum: number, isPlayerTurn: boolean) {
         if(isPlayerTurn) {
-            this.fieldArrange.player[fieldNum] = card
+            if(!this.fieldArrange.player[fieldNum]) {
+                this.fieldArrange.player[fieldNum] = card
+                this.canvasCardObjects.player.set(card.cardID, new CanvasCardObject(card, isPlayerTurn, {x: this.fieldAxis.player[fieldNum].x, y: this.fieldAxis.player[fieldNum].y}))
+            }
         } else {
-            this.fieldArrange.opponent[fieldNum] = card
+            if(!this.fieldArrange.opponent[fieldNum]) {
+                this.fieldArrange.opponent[fieldNum] = card
+                this.canvasCardObjects.opponent.set(card.cardID, new CanvasCardObject(card, isPlayerTurn, {x: this.fieldAxis.opponent[fieldNum].x, y: this.fieldAxis.opponent[fieldNum].y}))
+            }
         }
-        // ctx.drawImage(Loader.get(cardImagePath), this.fieldAxis.player[0].x, this.fieldAxis.player[0].y)
     }
     public kill(entity: number, fieldNum: number) {
         if(entity === 0) {
+            this.canvasCardObjects.opponent.delete(this.fieldArrange.opponent[fieldNum]!.cardID)
             this.fieldArrange.opponent[fieldNum] = undefined
         } else if(entity === 1) {
+            this.canvasCardObjects.player.delete(this.fieldArrange.player[fieldNum]!.cardID)
             this.fieldArrange.player[fieldNum] = undefined
         }
     }
     private loop() {
         ctx.clearRect(0, 0, body.getBoundingClientRect().width*dpr, body.getBoundingClientRect().height*dpr)
+        if(!this.isOn) return
         this.draw()
         this.renderCard()
         requestAnimationFrame(this.loop)
     }
-    init() {
+    async init() {
+        imageWidth = Loader.get(cardZonePath).width
+        imageHeight = Loader.get(cardZonePath).height
+        const top = Math.floor(body.getBoundingClientRect().height*dpr/100*60/2 - imageHeight + 4)
+        const left = Math.floor(body.getBoundingClientRect().width*dpr/2 - imageWidth * this.numOfCardZone/2 + 4 * (this.numOfCardZone-1)/2)
+        for(let i = 0; i < 2; i++) {
+            for(let n = 0; n < this.numOfCardZone; n++) {
+                const dx = left + ((imageWidth - 4) * n)
+                const dy = top + ((imageHeight - 4) * i)
+                if(i === 0) {
+                    this.fieldAxis.opponent.push({x: dx, y: dy})
+                } else {
+                    this.fieldAxis.player.push({x: dx, y: dy})
+                }
+            }    
+        }
         window.addEventListener("click", (e) => {
-            if(canSelect) {
-                const mouseX = e.clientX
-                const mouseY = e.clientY
+            const mouseX = e.clientX
+            const mouseY = e.clientY
+            if(this.isArranging) {
                 if(mouseX && mouseY) {
                     for(let i = 0; i < this.numOfCardZone; i++) {
-                        if(mouseX >= this.fieldAxis.player[i].x/dpr && mouseX < (this.fieldAxis.player[i].x+imageWidth)/dpr) {
+                        if(mouseX > this.fieldAxis.player[i].x/dpr && mouseX < (this.fieldAxis.player[i].x+imageWidth)/dpr) {
                             if(mouseY >= this.fieldAxis.player[i].y/dpr && mouseY < (this.fieldAxis.player[i].y+imageHeight)/dpr) {
-                                this.placeCard(this.selectedCard!, i, this.isPlayerTurn)
-                                canSelect = false
-                                this.isArranging = false
+                                if(!this.fieldArrange.player[i]) {
+                                    this.placeCard(this.selectedCard!, i, this.isPlayerTurn)
+                                    this.isArranging = false
+                                }
                             }
                         }
                     }
                 }
             }
-            
+            if(this.isSacrificing) {
+                if(mouseX && mouseY) {
+                    for(let i = 0; i < this.numOfCardZone; i++) {
+                        if(mouseX > this.fieldAxis.player[i].x/dpr && mouseX < (this.fieldAxis.player[i].x+imageWidth)/dpr) {
+                            if(mouseY >= this.fieldAxis.player[i].y/dpr && mouseY < (this.fieldAxis.player[i].y+imageHeight)/dpr) {
+                                if(this.fieldArrange.player[i]) {
+                                    if((this.selectedCard!.sacrifice[this.selectedSacrificeCard.length] === this.fieldArrange.player[i]!.type) || (this.selectedCard!.sacrifice[this.selectedSacrificeCard.length] === 0)) {
+                                        this.selectedSacrificeCard.push(i)
+                                        this.kill(1, i)
+                                        if(this.selectedSacrificeCard.length === this.selectedCard!.sacrifice.length) {
+                                            this.selectedSacrificeCard = []
+                                            this.isSacrificing = false
+                                            this.isArranging = true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         })
         window.addEventListener("mousemove", (e) => {
             const mouseX = e.clientX
@@ -150,8 +189,6 @@ export class Field {
                 }
             }
         })
-        imageWidth = Loader.get(cardZonePath).width
-        imageHeight = Loader.get(cardZonePath).height
         for(let i = 0; i < this.numOfCardZone; i++) {
             this.fieldArrange.player.push(undefined)
             this.fieldArrange.opponent.push(undefined)

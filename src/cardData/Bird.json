@@ -2,7 +2,7 @@
     "bird": {
         "name": "bird",
         "type": 1,
-        "sacrifice": 0,
+        "sacrifice": [],
         "attack": 1,
         "defence": 1,
         "health": 1

@@ -3,7 +3,11 @@ import { Card } from "../objects/Card";
 import { Opponent } from "../objects/Opponent";
 import { Player } from "../objects/Player";
 import { Field } from "./field";
+import { test } from "../../cardData/test.json"
+const body = document.body
 const bell = document.getElementById("bell")!
+const playerContainer = document.getElementById("player-container")!
+const cardInfo = document.getElementById("card-info")!
 const cardInfoOnHand = document.getElementById("card-info-on-hand")!
 export class Game {
     public isPlayerTurn: boolean = true
@@ -18,25 +22,108 @@ export class Game {
         this.numOfCardZone = numOfField
         this.field = new Field(this.numOfCardZone)
     }
-    async start() {
+
+    public async start() {
+        this.field.isOn = true
+        bell.style.transform = `translate(0px, 0px)`
+        playerContainer.style.transform = `translate(0px, 0px)`
+        cardInfo.style.transform = `translate(0px, 0px)`
         this.init()
         for(const [key, value] of this.opponent.deck) {
             this.opponent.addToHand(value)
         }
-        for(let i = 0; i < 3; i++) {
+        for(let i = 0; i < 10; i++) {
             await Wait(0.3)
             this.drawCard(true)
         }
     }
+    public end() {
+        this.field.isOn = false
+        this.field.init()
+        this.player.initHand()
+        bell.style.transform = `translate(0px, ${body.getBoundingClientRect().height / 100 * 40 + 110}px)`
+        playerContainer.style.transform = `translate(0px, ${body.getBoundingClientRect().height / 100 * 40}px)`
+        cardInfo.style.transform = `translate(500px, 0px)`
+    }
+
+    public numOfCardOnField() {
+        let playerCardCount: Array<number> = []
+        let opponentCardCount: Array<number> = []
+        this.field.fieldArrange.player.map((element) => {
+            if(element) {
+                playerCardCount.push(element.type)
+            }
+        })
+        this.field.fieldArrange.opponent.map((element) => {
+            if(element) {
+                opponentCardCount.push(element.type)
+            }
+        })
+        return {
+            player: {
+                types: {
+                    1: playerCardCount.filter((element) => element === 1).length,
+                    2: playerCardCount.filter((element) => element === 2).length,
+                    3: playerCardCount.filter((element) => element === 3).length
+                },
+                total: playerCardCount.length
+            }, 
+            opponent: {
+                types: {
+                    1: opponentCardCount.filter((element) => element === 1).length,
+                    2: opponentCardCount.filter((element) => element === 2).length,
+                    3: opponentCardCount.filter((element) => element === 3).length
+                },
+                total: opponentCardCount.length
+            }
+        }
+    }
+
+    public isApplyDefence(fieldID: number) {
+        let opponentCard = this.field.fieldArrange.opponent[fieldID]
+        let playerCard = this.field.fieldArrange.player[fieldID]
+        if(!this.isPlayerTurn) {
+            opponentCard = this.field.fieldArrange.player[fieldID]
+            playerCard = this.field.fieldArrange.opponent[fieldID]
+        }
+        let applyDefence: boolean = false
+        if(playerCard && opponentCard) {
+            if(playerCard.type === 1) {
+                if(opponentCard.type === 2) {
+                    applyDefence = true
+                }
+            } else if(playerCard.type === 2) {
+                if(opponentCard.type === 3) {
+                    applyDefence = true
+                }
+            } else if(playerCard.type === 3) {
+                if(opponentCard.type === 1) {
+                    applyDefence = true
+                }
+            }
+        }
+        return applyDefence
+    }
+
     public battle() {
         for(let i = 0; i < this.numOfCardZone; i++) {
             if(this.isPlayerTurn) {
                 if(this.field.fieldArrange.player[i]) {
                     if(this.field.fieldArrange.opponent[i]) {
-                        this.field.fieldArrange.opponent[i]!.heal -= this.field.fieldArrange.player[i]!.atk
-                        if(this.field.fieldArrange.opponent[i]!.heal <= 0) {
-                            this.field.kill(0, i)
+                        const canvasCardObject = this.field.canvasCardObjects.player.get(this.field.fieldArrange.player[i]!.cardID)!
+                        canvasCardObject.attack()
+                        // canvasCardObject.moveTo(canvasCardObject.x, canvasCardObject.y + 50, 80)
+                        let damage: number = 0
+                        if(this.isApplyDefence(i)) {
+                            damage = this.field.fieldArrange.opponent[i]!.def - this.field.fieldArrange.player[i]!.atk >= 0 ? 0 : -(this.field.fieldArrange.opponent[i]!.def - this.field.fieldArrange.player[i]!.atk)
+                        } else {
+                            damage = this.field.fieldArrange.player[i]!.atk
                         }
+                        this.field.fieldArrange.opponent[i]!.damage(damage).then(() => {
+                            if(this.field.fieldArrange.opponent[i]!.heal <= 0) {
+                                this.field.kill(0, i)
+                            }
+                        })
                     } else {
                         console.log("직접공격함") // TODO
                     }
@@ -44,10 +131,18 @@ export class Game {
             } else {
                 if(this.field.fieldArrange.opponent[i]) {
                     if(this.field.fieldArrange.player[i]) {
-                        this.field.fieldArrange.player[i]!.heal -= this.field.fieldArrange.opponent[i]!.atk
-                        if(this.field.fieldArrange.player[i]!.heal <= 0) {
-                            this.field.kill(1, i)
+                        let damage: number = 0
+                        if(this.isApplyDefence(i)) {
+                            damage = this.field.fieldArrange.player[i]!.def - this.field.fieldArrange.opponent[i]!.atk >= 0 ? 0 : -(this.field.fieldArrange.player[i]!.def - this.field.fieldArrange.opponent[i]!.atk)
+                        } else {
+                            damage = this.field.fieldArrange.opponent[i]!.atk
                         }
+                        this.field.fieldArrange.player[i]!.damage(damage).then(() => {
+                            if(this.field.fieldArrange.player[i]!.heal <= 0) {
+                                this.field.kill(1, i)
+                            }
+                        })
+                        
                     } else {
                         console.log("직접공격딤함") // TODO
                     }
@@ -56,26 +151,34 @@ export class Game {
             
         }
     }
+
     private turnChange() {
-        if(this.isPlayerTurn && this.phase > 1) {
+        if(this.isPlayerTurn) {
             this.isPlayerTurn = false
             this.phase = 0
-            bell.classList.add("bell-hidden")
+            bell.classList.remove("bell-up")
+            bell.classList.add("bell-pushed")
             this.intellect()
+            console.log("이제 상대턴")
         } else {
             this.phase++
             this.isPlayerTurn = true
-            bell.classList.remove("bell-hidden")
+            bell.classList.remove("bell-pushed")
+            bell.classList.add("bell-up")
+            console.log("이제 내턴")
         }
     }
+
     public async newArrange(card: Card) {
         await Wait(0.25)
         this.field.selectCard(card, this.isPlayerTurn)
         this.phase++
     }
+
     public addToHand(card: Card) {
         this.player.hand.set(card.cardID, card)
     }
+
     private drawCard(systemAuthority?: boolean) {
         if((this.isPlayerTurn && this.phase === 1) || systemAuthority) {
             let card = this.player.deck.get(this.player.deck.size-1)!
@@ -97,10 +200,8 @@ export class Game {
             cardContainer.classList.add("card", "card-on-hand")
             cardFrame.classList.add("card-part")
             cardImage.classList.add("card-part")
-            typeImage.classList.add("card-part-type")
+            typeImage.classList.add("card-part")
             
-
-            cardContainer.append(cardImage)
             cardContainer.append(cardFrame)
             cardContainer.append(typeImage)
 
@@ -129,15 +230,81 @@ export class Game {
             const magnification = (cardFrame.getBoundingClientRect().width/39)
             
             typeImage.style.width = `${5 * magnification}px`
-            typeImage.style.transform = `translate(${17 * magnification}px, ${28 * magnification}px)`
-            for(let i = 0; i < card.sacrifice; i++) {
+            typeImage.style.transform = `translate(${17 * magnification}px, ${42 * magnification}px)`
+            for(let i = 0; i < card.sacrifice.length; i++) {
                 const sacrificeImage = document.createElement("img") as HTMLImageElement
-                sacrificeImage.src = `../public/assets/part/sacrificeX4.png`
-                sacrificeImage.classList.add("card-part-sacrifice")
+                sacrificeImage.src = `../public/assets/part/sacrifice/${card.sacrifice[i]}X4.png`
+                sacrificeImage.classList.add("card-part")
                 cardContainer.append(sacrificeImage)
-                sacrificeImage.style.width = `${5 * magnification}px`
-                sacrificeImage.style.transform = `translate(${2 * magnification + (6*magnification*i)}px, ${34 * magnification}px)`
+                sacrificeImage.style.width = `${7 * magnification}px`
+                sacrificeImage.style.transform = `translate(${4 * magnification + (8*magnification*i)}px, ${33 * magnification}px)`
             }
+
+            cardContainer.append(cardImage)
+
+            if(card.atk < 10) {
+                const numberImage = document.createElement("img") as HTMLImageElement
+                numberImage.src = `../public/assets/part/number/${card.atk}.png`
+                numberImage.classList.add("card-part")
+                cardContainer.append(numberImage)
+                numberImage.style.width = `${3 * magnification}px`
+                numberImage.style.transform = `translate(${7 * magnification}px, ${52 * magnification}px)`
+            } else {
+                const numberImage1 = document.createElement("img") as HTMLImageElement
+                const numberImage2 = document.createElement("img") as HTMLImageElement
+                numberImage1.src = `../public/assets/part/number/${Math.floor(card.atk/10)}.png`
+                numberImage2.src = `../public/assets/part/number/${card.atk%10}.png`
+                numberImage1.classList.add("card-part")
+                numberImage2.classList.add("card-part")
+                cardContainer.append(numberImage1, numberImage2)
+                numberImage1.style.width = `${3 * magnification}px`
+                numberImage2.style.width = `${3 * magnification}px`
+                numberImage1.style.transform = `translate(${5 * magnification}px, ${52 * magnification}px)`
+                numberImage2.style.transform = `translate(${9 * magnification}px, ${52 * magnification}px)`
+            }
+
+            if(card.def < 10) {
+                const numberImage = document.createElement("img") as HTMLImageElement
+                numberImage.src = `../public/assets/part/number/${card.def}.png`
+                numberImage.classList.add("card-part")
+                cardContainer.append(numberImage)
+                numberImage.style.width = `${3 * magnification}px`
+                numberImage.style.transform = `translate(${29 * magnification}px, ${52 * magnification}px)`
+            } else {
+                const numberImage1 = document.createElement("img") as HTMLImageElement
+                const numberImage2 = document.createElement("img") as HTMLImageElement
+                numberImage1.src = `../public/assets/part/number/${Math.floor(card.def/10)}.png`
+                numberImage2.src = `../public/assets/part/number/${card.def%10}.png`
+                numberImage1.classList.add("card-part")
+                numberImage2.classList.add("card-part")
+                cardContainer.append(numberImage1, numberImage2)
+                numberImage1.style.width = `${3 * magnification}px`
+                numberImage2.style.width = `${3 * magnification}px`
+                numberImage1.style.transform = `translate(${27 * magnification}px, ${52 * magnification}px)`
+                numberImage2.style.transform = `translate(${31 * magnification}px, ${52 * magnification}px)`
+            }
+
+            if(card.heal < 10) {
+                const numberImage = document.createElement("img") as HTMLImageElement
+                numberImage.src = `../public/assets/part/number/${card.heal}.png`
+                numberImage.classList.add("card-part")
+                cardContainer.append(numberImage)
+                numberImage.style.width = `${3 * magnification}px`
+                numberImage.style.transform = `translate(${18 * magnification}px, ${53 * magnification}px)`
+            } else {
+                const numberImage1 = document.createElement("img") as HTMLImageElement
+                const numberImage2 = document.createElement("img") as HTMLImageElement
+                numberImage1.src = `../public/assets/part/number/${Math.floor(card.heal/10)}.png`
+                numberImage2.src = `../public/assets/part/number/${card.heal%10}.png`
+                numberImage1.classList.add("card-part")
+                numberImage2.classList.add("card-part")
+                cardContainer.append(numberImage1, numberImage2)
+                numberImage1.style.width = `${3 * magnification}px`
+                numberImage2.style.width = `${3 * magnification}px`
+                numberImage1.style.transform = `translate(${16 * magnification}px, ${53 * magnification}px)`
+                numberImage2.style.transform = `translate(${20 * magnification}px, ${53 * magnification}px)`
+            }
+
             cardContainer.style.height = `${65 * magnification}px`
 
             setTimeout(() => {
@@ -145,18 +312,26 @@ export class Game {
             }, 50)
 
             cardContainer.addEventListener("click", async () => {
-                if(this.isPlayerTurn && this.phase <= 2) {
-                    cardContainer.style.transform += `translateY(${body.getBoundingClientRect().height/2}px)`
-                    this.player.removeToHand(card.cardID)
-                    this.newArrange(card)
-                    await Wait(0.2)
-                    hand.removeChild(cardContainer)
-                    let i = 0
-                    this.player.hand.forEach((element) => {
-                        const cardElement = document.getElementById(`card-${element.cardID}`)!
-                        cardElement.style.left = `${20 + (120 * (i))}px`
-                        i++
-                    })
+                if(this.isPlayerTurn && !this.field.isArranging && !this.field.isSacrificing) {
+                    if(this.numOfCardOnField().player.total >= card.sacrifice.length) {
+                        if(this.numOfCardOnField().player.types[1] >= card.sacrifice.filter((element) => element === 1).length) {
+                            if(this.numOfCardOnField().player.types[2] >= card.sacrifice.filter((element) => element === 2).length) {
+                                if(this.numOfCardOnField().player.types[3] >= card.sacrifice.filter((element) => element === 3).length) {
+                                    cardContainer.style.transform += `translateY(${body.getBoundingClientRect().height/2}px)`
+                                    this.player.removeToHand(card.cardID)
+                                    this.newArrange(card)
+                                    await Wait(0.2)
+                                    hand.removeChild(cardContainer)
+                                    let i = 0
+                                    this.player.hand.forEach((element) => {
+                                        const cardElement = document.getElementById(`card-${element.cardID}`)!
+                                        cardElement.style.left = `${20 + (120 * (i))}px`
+                                        i++
+                                    })
+                                }
+                            }
+                        }
+                    }
                 }
                 
             })
@@ -165,6 +340,7 @@ export class Game {
             }
         }
     }
+
     private async intellect() {
         let bestHighDamage: number = 0
         let bestCard: Card
@@ -172,7 +348,6 @@ export class Game {
         const opponentsHand = this.opponent.hand
         const opponentsField = this.field.fieldArrange.opponent
         const playersField = this.field.fieldArrange.player
-        console.log(opponentsHand)
         for(const [_key, value] of opponentsHand) {
             for(let i = 0; i < this.numOfCardZone; i++) {
                 if(playersField[i] && !opponentsField[i]) {
@@ -197,21 +372,30 @@ export class Game {
         this.battle()
         this.turnChange()
     }
+
     private init() {
         const deck = document.getElementById("player-deck")!
         bell.addEventListener("click", () => {
-            if(this.isPlayerTurn && this.phase > 1 && !this.field.isArranging) {
+            if(this.isPlayerTurn && (this.phase > 1 || this.player.deck.size <= 0) && !this.field.isArranging && !this.field.isSacrificing) {
                 this.battle()
                 this.turnChange()
             }
         })
-        if(!this.isPlayerTurn) {
-            bell.classList.add("bell-hidden")
+        bell.classList.add("bell-pushed")
+        if(this.isPlayerTurn) {
+            bell.classList.remove("bell-pushed")
         } else {
-            bell.classList.remove("bell-hidden")
+            bell.classList.add("bell-pushed")
         }
         this.field.init()
         this.player.initHand()
+
+        this.field.placeCard(new Card({cardID: 10, ...test}), 0, false)
+        this.field.placeCard(new Card({cardID: 11, ...test}), 1, false)
+        this.field.placeCard(new Card({cardID: 12, ...test}), 2, false)
+        this.field.placeCard(new Card({cardID: 13, ...test}), 3, false)
+        this.field.placeCard(new Card({cardID: 14, ...test}), 4, false)
+
         deck.addEventListener('click', () => {
             if(this.player.hand.size < 10 && this.player.deck.size > 0) {
                 this.drawCard()

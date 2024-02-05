@@ -1,0 +1,10 @@
+{
+    "shark": {
+        "name": "shark",
+        "type": 3,
+        "sacrifice": [3, 3, 3],
+        "attack": 5,
+        "defence": 3,
+        "health": 5
+    }
+}

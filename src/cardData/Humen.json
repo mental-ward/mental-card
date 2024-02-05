@@ -2,7 +2,7 @@
     "humen": {
         "name": "humen",
         "type": 1,
-        "sacrifice": 1,
+        "sacrifice": [0],
         "attack": 2,
         "defence": 2,
         "health": 3
