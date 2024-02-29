@@ -9,8 +9,7 @@ export class Scenario {
     private static isScenarioOn = false
     static async on() {
         if(!this.isScenarioOn) {
-            console.log(World)
-            // World.pause()
+            World.pause()
             scenarioContainer.classList.remove("hidden")
             await Wait(0.1)
             bell.style.transform = `translate(0px, ${body.getBoundingClientRect().height / 100 * 40 + 90}px)`

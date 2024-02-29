@@ -3,7 +3,7 @@ import { Player } from "./entities/Player";
 import { Space } from "./Space"
 import { Npc } from "./entities/Npc";
 import { Subtitle } from "../subtitle/Subtitle";
-import { space0 } from "./spaceData/Space0";
+import { space0, startSpace0Script } from "./spaceData/Space0";
 
 const body = document.body
 const bell = document.getElementById("bell")!
@@ -45,7 +45,9 @@ const keyupEvent = (e: KeyboardEvent) => {
 }
 const keypressEvent = (e: KeyboardEvent) => {
     if(e.key === "e" || e.key === "E") {
-        if(World.targetedEventer.eventAvailability && !World.atEvent) {
+        // @Lotinex
+        // undefined 버그 수정
+        if(World.targetedEventer?.eventAvailability && !World.atEvent) {
             World.atEvent = true
             World.targetedEventer.event()
         }
@@ -213,6 +215,11 @@ export class World {
         cardInfo.style.transform = `translate(500px, 0px)`
         World.isOn = true
         requestAnimationFrame(World.loop)
+        // @Lotinex
+        // 다른곳이 적당하다고 생각하면 호출 위치 수정 ㄱㄱ 
+        // Space0가 처음 시작하게되는 장면이라는 가정 하에 이곳에 넣은거임 
+        // (게임이 시작하고 Space0 스크립트가 호출되도록)
+        startSpace0Script()
     }
     static off() {
         window.removeEventListener("keydown", keydownEvent)
