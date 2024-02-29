@@ -1,6 +1,6 @@
 import { Wait } from "../etc/Wait"
 
-type info = {cardID: number, name: string, type: number, sacrifice: Array<number>, attack: number, defence: number, health: number}
+type info = {cardID: number, name: string, type: number, sacrifice: Array<number>, attack: number, defence: number, health: number, abilities: string}
 export class Card {
     public heal: number
     public cardID: number
@@ -9,6 +9,7 @@ export class Card {
     public def: number
     public type: number
     public sacrifice: Array<number>
+    public abilities: string
     constructor(info: info){
         this.cardID = info.cardID
         this.name = info.name
@@ -17,10 +18,11 @@ export class Card {
         this.atk = info.attack
         this.def = info.defence
         this.heal = info.health
+        this.abilities = info.abilities
     }
     public async damage(damage: number) {
         for(let i = 0; i < damage; i++) {
-            await Wait(0.06)
+            await Wait(0.15/damage)
             this.heal -= 1
             console.log(this.heal)
             if(this.heal <= 0) {

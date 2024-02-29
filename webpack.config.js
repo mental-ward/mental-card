@@ -20,5 +20,5 @@ module.exports = {
         path: path.resolve(__dirname, "public/dist"),
         filename : '[name]_bundle.js'
     },
-    target: ["electron-renderer"]
+    target: ["electron-renderer", "node"],
 }

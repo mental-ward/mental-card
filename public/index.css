@@ -83,12 +83,15 @@ body {
     height: 100px;
     background-color: #000;
 }
+.bell-hidden {
+    transform: translateY(100vh);
+}
 #bell {
     width: 13%;
     position: absolute;
     top: 47%;
     left: 50px;
-    transition: transform .5s;
+    transition: transform .4s;
 }
 .bell-pushed {
     transform: translateY(90px);

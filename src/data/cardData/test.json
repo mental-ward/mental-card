@@ -1,0 +1,11 @@
+{
+    "test": {
+        "name": "human",
+        "type": 1,
+        "sacrifice": [0, 0, 0, 0],
+        "attack": 99,
+        "defence": 99,
+        "health": 99,
+        "abilities": "double-attack"
+    }
+}

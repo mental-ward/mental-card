@@ -1,0 +1,12 @@
+
+{
+    "forestGuardian": {
+        "name": "forestGuardian",
+        "type": 1,
+        "sacrifice": [1, 1, 1, 1],
+        "attack": 7,
+        "defence": 3,
+        "health": 6,
+        "abilities": ""
+    }
+}

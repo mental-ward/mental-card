@@ -2,14 +2,12 @@ import { CanvasCardObject } from "../cardObject/CanvasCardObject"
 import Loader from "../etc/Loader"
 import { Card } from "../objects/Card"
 
-import { bird } from "../../cardData/Bird.json"
-
 const canvas = document.getElementById("canvas") as HTMLCanvasElement
 const ctx = canvas.getContext("2d") as CanvasRenderingContext2D
 const cardInfoOnField = document.getElementById("card-info-on-field")!
 const body = document.body
 const dpr = window.devicePixelRatio
-const cardZonePath = "../public/assets/card-zoneX4.png"
+const cardZonePath = "../public/assets/card-zone.png"
 let imageWidth: number
 let imageHeight: number
 type Axis = {x: number, y:number}

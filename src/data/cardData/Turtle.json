@@ -1,0 +1,11 @@
+{
+    "turtle": {
+        "name": "turtle",
+        "type": 3,
+        "sacrifice": [0, 0, 0],
+        "attack": 2,
+        "defence": 6,
+        "health": 4,
+        "abilities": ""
+    }
+}
