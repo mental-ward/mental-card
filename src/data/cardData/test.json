@@ -1,11 +1,23 @@
 {
     "test": {
-        "name": "human",
+        "id": "bird",
+        "name": "테스트",
         "type": 1,
         "sacrifice": [0, 0, 0, 0],
         "attack": 99,
         "defence": 99,
         "health": 99,
-        "abilities": "double-attack"
+        "abilities": {
+            "passive": {
+                "id": "none",
+                "name": "",
+                "desc": ""
+            },
+            "active": {
+                "id": "none",
+                "name": "",
+                "desc": ""
+            }
+        }
     }
 }

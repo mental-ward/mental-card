@@ -1,0 +1,51 @@
+"filename", "language", "JSON with Comments", "TypeScript", "JavaScript", "JSON", "HTML", "CSS", "Markdown", "comment", "blank", "total"
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\README.md", "Markdown", 0, 0, 0, 0, 0, 0, 49, 0, 23, 72
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\dist\main.js", "JavaScript", 0, 0, 30, 0, 0, 0, 0, 1, 1, 32
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\mental_card_data\player.json", "JSON", 0, 0, 0, 3, 0, 0, 0, 0, 0, 3
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\package-lock.json", "JSON", 0, 0, 0, 2205, 0, 0, 0, 0, 1, 2206
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\package.json", "JSON", 0, 0, 0, 20, 0, 0, 0, 0, 1, 21
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\public\dist\index_bundle.js", "JavaScript", 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\public\index.css", "CSS", 0, 0, 0, 0, 0, 117, 0, 1, 0, 118
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\public\index.html", "HTML", 0, 0, 0, 0, 22, 0, 0, 0, 1, 23
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\data\cardData\Bird.json", "JSON", 0, 0, 0, 11, 0, 0, 0, 0, 0, 11
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\data\cardData\Fish.json", "JSON", 0, 0, 0, 11, 0, 0, 0, 0, 0, 11
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\data\cardData\ForestGuardian.json", "JSON", 0, 0, 0, 11, 0, 0, 0, 0, 1, 12
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\data\cardData\Humen.json", "JSON", 0, 0, 0, 11, 0, 0, 0, 0, 0, 11
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\data\cardData\Shark.json", "JSON", 0, 0, 0, 11, 0, 0, 0, 0, 0, 11
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\data\cardData\Turtle.json", "JSON", 0, 0, 0, 11, 0, 0, 0, 0, 0, 11
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\data\cardData\test.json", "JSON", 0, 0, 0, 11, 0, 0, 0, 0, 0, 11
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\index.ts", "TypeScript", 0, 101, 0, 0, 0, 0, 0, 7, 23, 131
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\card-game\CardGameEngine.ts", "TypeScript", 0, 215, 0, 0, 0, 0, 0, 46, 27, 288
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\card-game\CardGameUI.ts", "TypeScript", 0, 140, 0, 0, 0, 0, 0, 0, 6, 146
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\card-game\Field.ts", "TypeScript", 0, 190, 0, 0, 0, 0, 0, 0, 3, 193
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\card-game\Game copy.ts", "TypeScript", 0, 357, 0, 0, 0, 0, 0, 47, 34, 438
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\card-game\Game.ts", "TypeScript", 0, 22, 0, 0, 0, 0, 0, 0, 0, 22
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\cardObject\CanvasCardObject.ts", "TypeScript", 0, 141, 0, 0, 0, 0, 0, 8, 3, 152
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\engine\Engine.ts", "TypeScript", 0, 6, 0, 0, 0, 0, 0, 0, 2, 8
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\etc\Loader.ts", "TypeScript", 0, 26, 0, 0, 0, 0, 0, 0, 0, 26
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\etc\ToCanvasAxis.ts", "TypeScript", 0, 4, 0, 0, 0, 0, 0, 0, 0, 4
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\etc\Wait.ts", "TypeScript", 0, 7, 0, 0, 0, 0, 0, 0, 0, 7
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\objects\Card.ts", "TypeScript", 0, 34, 0, 0, 0, 0, 0, 0, 1, 35
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\objects\Opponent.ts", "TypeScript", 0, 21, 0, 0, 0, 0, 0, 0, 1, 22
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\objects\Player.ts", "TypeScript", 0, 25, 0, 0, 0, 0, 0, 7, 1, 33
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\scenario\Scenario.ts", "TypeScript", 0, 37, 0, 0, 0, 0, 0, 0, 1, 38
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\screenEffect\ArcFade.ts", "TypeScript", 0, 46, 0, 0, 0, 0, 0, 0, 5, 51
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\screenEffect\OpacityFade.ts", "TypeScript", 0, 38, 0, 0, 0, 0, 0, 0, 3, 41
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\story\Story.ts", "TypeScript", 0, 10, 0, 0, 0, 0, 0, 0, 3, 13
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\subtitle\Subtitle.ts", "TypeScript", 0, 84, 0, 0, 0, 0, 0, 0, 8, 92
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\world\Chapter.ts", "TypeScript", 0, 11, 0, 0, 0, 0, 0, 0, 1, 12
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\world\Space.ts", "TypeScript", 0, 110, 0, 0, 0, 0, 0, 0, 2, 112
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\world\World.ts", "TypeScript", 0, 257, 0, 0, 0, 0, 0, 4, 7, 268
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\world\chapters\chapter_0\main.ts", "TypeScript", 0, 44, 0, 0, 0, 0, 0, 1, 4, 49
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\world\chapters\chapter_0\top.ts", "TypeScript", 0, 23, 0, 0, 0, 0, 0, 0, 2, 25
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\world\entities\Entity.ts", "TypeScript", 0, 15, 0, 0, 0, 0, 0, 0, 0, 15
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\world\entities\Npc.ts", "TypeScript", 0, 122, 0, 0, 0, 0, 0, 1, 5, 128
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\world\entities\Player.ts", "TypeScript", 0, 11, 0, 0, 0, 0, 0, 0, 1, 12
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\world\entities\Stuff.ts", "TypeScript", 0, 22, 0, 0, 0, 0, 0, 0, 0, 22
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\world\entities\Wall.ts", "TypeScript", 0, 9, 0, 0, 0, 0, 0, 0, 2, 11
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\world\entityData\entities.ts", "TypeScript", 0, 2, 0, 0, 0, 0, 0, 0, 2, 4
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\main.ts", "TypeScript", 0, 25, 0, 0, 0, 0, 0, 1, 4, 30
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\types\card.d.ts", "TypeScript", 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\tsconfig.json", "JSON with Comments", 18, 0, 0, 0, 0, 0, 0, 0, 0, 18
+"c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\webpack.config.js", "JavaScript", 0, 0, 24, 0, 0, 0, 0, 0, 0, 24
+"Total", "-", 18, 2155, 55, 2305, 22, 117, 49, 124, 180, 5025

@@ -1,0 +1,87 @@
+Date : 2024-08-02 14:56:55
+Directory : c:\Users\a0104\OneDrive\바탕 화면\Mental-Card
+Total : 35 files,  3043 codes, 68 comments, 92 blanks, all 3203 lines
+
+Languages
++--------------------+------------+------------+------------+------------+------------+
+| language           | files      | code       | comment    | blank      | total      |
++--------------------+------------+------------+------------+------------+------------+
+| JSON               |          3 |      2,228 |          0 |          2 |      2,230 |
+| TypeScript         |         25 |        554 |         66 |         65 |        685 |
+| CSS                |          1 |        117 |          1 |          0 |        118 |
+| JavaScript         |          3 |         55 |          1 |          1 |         57 |
+| Markdown           |          1 |         49 |          0 |         23 |         72 |
+| HTML               |          1 |         22 |          0 |          1 |         23 |
+| JSON with Comments |          1 |         18 |          0 |          0 |         18 |
++--------------------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                               | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                  |         35 |      3,043 |         68 |         92 |      3,203 |
+| . (Files)                                                                          |          5 |      2,316 |          0 |         25 |      2,341 |
+| dist                                                                               |          1 |         30 |          1 |          1 |         32 |
+| mental_card_data                                                                   |          1 |          3 |          0 |          0 |          3 |
+| public                                                                             |          3 |        140 |          1 |          1 |        142 |
+| public (Files)                                                                     |          2 |        139 |          1 |          1 |        141 |
+| public\dist                                                                        |          1 |          1 |          0 |          0 |          1 |
+| src                                                                                |         25 |        554 |         66 |         65 |        685 |
+| src (Files)                                                                        |          1 |         31 |          5 |         10 |         46 |
+| src\lib                                                                            |         24 |        523 |         61 |         55 |        639 |
+| src\lib\card-game                                                                  |          5 |        850 |         93 |         66 |      1,009 |
+| src\lib\cardObject                                                                 |          1 |         -5 |          8 |          0 |          3 |
+| src\lib\game                                                                       |          2 |       -549 |        -47 |        -37 |       -633 |
+| src\lib\objects                                                                    |          2 |         -8 |          7 |          0 |         -1 |
+| src\lib\screenEffect                                                               |          2 |         84 |          0 |          8 |         92 |
+| src\lib\story                                                                      |          1 |         10 |          0 |          3 |         13 |
+| src\lib\world                                                                      |         11 |        141 |          0 |         15 |        156 |
+| src\lib\world (Files)                                                              |          2 |        104 |          1 |          5 |        110 |
+| src\lib\world\chapters                                                             |          3 |         15 |          0 |          4 |         19 |
+| src\lib\world\chapters (Files)                                                     |          1 |        -52 |         -1 |         -2 |        -55 |
+| src\lib\world\chapters\chapter_0                                                   |          2 |         67 |          1 |          6 |         74 |
+| src\lib\world\entities                                                             |          4 |         22 |         -1 |          5 |         26 |
+| src\lib\world\entityData                                                           |          2 |          0 |          0 |          1 |          1 |
++------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| filename                                                                           | language           | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\README.md                                | Markdown           |         49 |          0 |         23 |         72 |
+| c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\dist\main.js                             | JavaScript         |         30 |          1 |          1 |         32 |
+| c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\mental_card_data\player.json             | JSON               |          3 |          0 |          0 |          3 |
+| c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\package-lock.json                        | JSON               |      2,205 |          0 |          1 |      2,206 |
+| c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\package.json                             | JSON               |         20 |          0 |          1 |         21 |
+| c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\public\dist\index_bundle.js              | JavaScript         |          1 |          0 |          0 |          1 |
+| c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\public\index.css                         | CSS                |        117 |          1 |          0 |        118 |
+| c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\public\index.html                        | HTML               |         22 |          0 |          1 |         23 |
+| c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\index.ts                             | TypeScript         |         31 |          5 |         10 |         46 |
+| c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\card-game\CardGameEngine.ts      | TypeScript         |        219 |         46 |         26 |        291 |
+| c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\card-game\CardGameUI.ts          | TypeScript         |         67 |          0 |          3 |         70 |
+| c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\card-game\Field.ts               | TypeScript         |        190 |          0 |          3 |        193 |
+| c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\card-game\Game copy.ts           | TypeScript         |        357 |         47 |         34 |        438 |
+| c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\card-game\Game.ts                | TypeScript         |         17 |          0 |          0 |         17 |
+| c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\cardObject\CanvasCardObject.ts   | TypeScript         |         -5 |          8 |          0 |          3 |
+| c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\game\Field.ts                    | TypeScript         |       -193 |          0 |         -3 |       -196 |
+| c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\game\Game.ts                     | TypeScript         |       -356 |        -47 |        -34 |       -437 |
+| c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\objects\Card.ts                  | TypeScript         |          2 |          0 |          0 |          2 |
+| c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\objects\Player.ts                | TypeScript         |        -10 |          7 |          0 |         -3 |
+| c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\screenEffect\ArcFade.ts          | TypeScript         |         46 |          0 |          5 |         51 |
+| c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\screenEffect\OpacityFade.ts      | TypeScript         |         38 |          0 |          3 |         41 |
+| c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\story\Story.ts                   | TypeScript         |         10 |          0 |          3 |         13 |
+| c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\world\Space.ts                   | TypeScript         |         77 |         -1 |          1 |         77 |
+| c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\world\World.ts                   | TypeScript         |         27 |          2 |          4 |         33 |
+| c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\world\chapters\chapter0.ts       | TypeScript         |        -52 |         -1 |         -2 |        -55 |
+| c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\world\chapters\chapter_0\main.ts | TypeScript         |         44 |          1 |          4 |         49 |
+| c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\world\chapters\chapter_0\top.ts  | TypeScript         |         23 |          0 |          2 |         25 |
+| c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\world\entities\Entity.ts         | TypeScript         |         -1 |          0 |          0 |         -1 |
+| c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\world\entities\Npc.ts            | TypeScript         |         13 |         -1 |          3 |         15 |
+| c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\world\entities\Player.ts         | TypeScript         |          1 |          0 |          0 |          1 |
+| c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\world\entities\Wall.ts           | TypeScript         |          9 |          0 |          2 |         11 |
+| c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\world\entityData\bed.ts          | TypeScript         |         -2 |          0 |         -1 |         -3 |
+| c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\src\lib\world\entityData\entities.ts     | TypeScript         |          2 |          0 |          2 |          4 |
+| c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\tsconfig.json                            | JSON with Comments |         18 |          0 |          0 |         18 |
+| c:\Users\a0104\OneDrive\바탕 화면\Mental-Card\webpack.config.js                        | JavaScript         |         24 |          0 |          0 |         24 |
+| Total                                                                              |                    |      3,043 |         68 |         92 |      3,203 |
++------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+

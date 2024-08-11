@@ -1,11 +1,23 @@
 {
     "fish": {
-        "name": "fish",
+        "id": "fish",
+        "name": "활어",
         "type": 3,
         "sacrifice": [],
         "attack": 0,
         "defence": 1,
         "health": 2,
-        "abilities": ""
+        "abilities": {
+            "passive": {
+                "id": "none",
+                "name": "",
+                "desc": ""
+            },
+            "active": {
+                "id": "none",
+                "name": "",
+                "desc": ""
+            }
+        }
     }
 }

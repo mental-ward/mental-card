@@ -1,11 +1,23 @@
 {
     "humen": {
-        "name": "humen",
+        "id": "humen",
+        "name": "인간",
         "type": 1,
         "sacrifice": [0],
         "attack": 2,
         "defence": 2,
         "health": 3,
-        "abilities": ""
+        "abilities": {
+            "passive": {
+                "id": "none",
+                "name": "",
+                "desc": ""
+            },
+            "active": {
+                "id": "none",
+                "name": "",
+                "desc": ""
+            }
+        }
     }
 }

@@ -13,6 +13,7 @@ body {
     width: 100vw;
 }
 #player-container {
+    z-index: 2;
     bottom: 0px;
     position: fixed;
     width: 100%;
@@ -87,6 +88,7 @@ body {
     transform: translateY(100vh);
 }
 #bell {
+    z-index: 1;
     width: 13%;
     position: absolute;
     top: 47%;
@@ -109,4 +111,8 @@ body {
     top: 5%;
     right: 2%;
     transition: transform .5s;
+}
+#fog {
+    position: absolute;;
+    z-index: 100;
 }

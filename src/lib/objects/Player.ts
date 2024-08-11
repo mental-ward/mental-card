@@ -11,7 +11,7 @@ export class Player {
         this.hand.clear()
     }
     public addToDeck(card: Card) {
-        this.deck.set(card.cardID, card)
+        this.deck.set(card.uid, card)
         this.updateDeck()
     }
     public removeToDeck(cardID: number) {
@@ -22,15 +22,12 @@ export class Player {
         this.hand.delete(cardUID)
     }
     private updateDeck() {
-        const deck = document.getElementById("player-deck")!
-        deck.replaceChildren()
-        this.deck.forEach((element: Card, key: number) => {
-            const card = document.createElement("img") as HTMLImageElement
-            card.src = "./assets/card/back.png"
-            card.alt = element.name
-            card.classList.add("card")
-            card.style.right = `${key*5 + 20}px`
-            deck.append(card)
-        })
+        // this.deck.forEach((element: Card, key: number) => {
+        //     const card = document.createElement("img") as HTMLImageElement
+        //     card.src = "./assets/card/back.png"
+        //     card.alt = element.name
+        //     card.classList.add("card")
+        //     card.style.right = `${key*5 + 20}px`
+        // })
     }
 }

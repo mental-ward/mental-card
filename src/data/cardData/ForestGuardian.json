@@ -1,7 +1,8 @@
 
 {
     "forestGuardian": {
-        "name": "forestGuardian",
+        "id": "forestGuardian",
+        "name": "숲지기",
         "type": 1,
         "sacrifice": [1, 1, 1, 1],
         "attack": 7,

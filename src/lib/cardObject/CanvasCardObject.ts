@@ -13,63 +13,77 @@ export class CanvasCardObject {
     private isPlayerCard: boolean
     private attackMotion: boolean = false
     private isPlayerTurn: boolean = false
-    constructor(card: Card, isPlayerCard: boolean, axis: {x: number, y: number}) {
+    public isMouseOver: boolean = false
+    private theme: string
+    private x3Option: string = ""
+    private multiple: number = 1
+    public savedPos = {
+        x: 0,
+        y: 0
+    }
+    constructor(card: Card, isPlayerCard: boolean, axis: {x: number, y: number}, theme: string, x3Option?: boolean) {
         this.card = card
         this.isPlayerCard = isPlayerCard
         this.x = axis.x
-        if(this.isPlayerCard) {
-            this.y = body.getBoundingClientRect().height*60/100*dpr
-        } else {
-            this.y = body.getBoundingClientRect().height*-dpr
-        }
+        this.y = axis.y
+        // if(this.isPlayerCard) {
+        //     this.y = body.getBoundingClientRect().height*60/100*dpr
+        // } else {
+        //     this.y = body.getBoundingClientRect().height*-dpr
+        // }
+        this.theme = `${theme}`
+        this.x3Option = x3Option ? "x3" : ""
+        this.multiple = x3Option ? 3 : 2
         this.xSaver = axis.x
         this.ySaver = axis.y
+        this.save()
     }
-    public draw() {
+    public load() {
         const canvas = document.getElementById("canvas") as HTMLCanvasElement
         const ctx = canvas.getContext("2d") as CanvasRenderingContext2D
-        const cardFramePath = "../public/assets/card/front.png"
-        const cardImagePath = `../public/assets/monster/${this.card.name}.png`
-        const typeImagePath = `../public/assets/part/type/${this.card.type}.png`
+        const cardFramePath = `../public/assets/card/${this.theme}/front${this.x3Option}.png`
+        const cardImagePath = `../public/assets/monster/${this.theme}/${this.card.id}${this.x3Option}.png`
+        const typeImagePath = `../public/assets/part/type/${this.theme}/${this.card.type}${this.x3Option}.png`
         
         ctx.drawImage(Loader.get(cardFramePath), this.x, this.y)
-        ctx.drawImage(Loader.get(typeImagePath), this.x + 17*4, this.y + 42*4)
+        ctx.drawImage(Loader.get(typeImagePath), this.x + 15*2*this.multiple, this.y + 50*2*this.multiple)
         for(let i = 0; i < this.card.sacrifice.length; i++) {
-            const sacrificeImage = `../public/assets/part/sacrifice/${this.card.sacrifice[i]}.png`
-            ctx.drawImage(Loader.get(sacrificeImage), this.x + 4*4 + (8*4*i), this.y + 33*4)
+            const sacrificeImage = `../public/assets/part/sacrifice/${this.card.sacrifice[i]}${this.x3Option}.png`
+            ctx.drawImage(Loader.get(sacrificeImage), this.x + 4*2*this.multiple + (8*2*this.multiple*i), this.y + 34*2*this.multiple)
         }
         ctx.drawImage(Loader.get(cardImagePath), this.x, this.y)
         if(this.card.atk < 10) {
-            const numberImagePath = `../public/assets/part/number/${this.card.atk}.png`
-            ctx.drawImage(Loader.get(numberImagePath), this.x + 52*2, this.y + 96*2)
+            const numberImagePath = `../public/assets/part/number/${this.card.atk}${this.x3Option}.png`
+            ctx.drawImage(Loader.get(numberImagePath), this.x + 52*this.multiple, this.y + 96*this.multiple)
         } else {
-            const numberImagePath1 = `../public/assets/part/number/${Math.floor(this.card.atk/10)}.png`
-            const numberImagePath2 = `../public/assets/part/number/${this.card.atk%10}.png`
-            ctx.drawImage(Loader.get(numberImagePath1), this.x + 48*2, this.y + 96*2)
-            ctx.drawImage(Loader.get(numberImagePath2), this.x + 56*2, this.y + 96*2)
+            const numberImagePath1 = `../public/assets/part/number/${Math.floor(this.card.atk/10)}${this.x3Option}.png`
+            const numberImagePath2 = `../public/assets/part/number/${this.card.atk%10}${this.x3Option}.png`
+            ctx.drawImage(Loader.get(numberImagePath1), this.x + 48*this.multiple, this.y + 96*this.multiple)
+            ctx.drawImage(Loader.get(numberImagePath2), this.x + 56*this.multiple, this.y + 96*this.multiple)
         }
         if(this.card.def < 10) {
-            const numberImagePath = `../public/assets/part/number/${this.card.def}.png`
-            ctx.drawImage(Loader.get(numberImagePath), this.x + 65*2, this.y + 112*2)
+            const numberImagePath = `../public/assets/part/number/${this.card.def}${this.x3Option}.png`
+            ctx.drawImage(Loader.get(numberImagePath), this.x + 65*this.multiple, this.y + 112*this.multiple)
         } else {
-            const numberImagePath1 = `../public/assets/part/number/${Math.floor(this.card.def/10)}.png`
-            const numberImagePath2 = `../public/assets/part/number/${this.card.def%10}.png`
-            ctx.drawImage(Loader.get(numberImagePath1), this.x + 61*2, this.y + 112*2)
-            ctx.drawImage(Loader.get(numberImagePath2), this.x + 69*2, this.y + 112*2)
+            const numberImagePath1 = `../public/assets/part/number/${Math.floor(this.card.def/10)}${this.x3Option}.png`
+            const numberImagePath2 = `../public/assets/part/number/${this.card.def%10}${this.x3Option}.png`
+            ctx.drawImage(Loader.get(numberImagePath1), this.x + 61*this.multiple, this.y + 112*this.multiple)
+            ctx.drawImage(Loader.get(numberImagePath2), this.x + 69*this.multiple, this.y + 112*this.multiple)
         }
         if(this.card.heal < 10) {
-            const numberImagePath = `../public/assets/part/number/${this.card.heal}.png`
-            ctx.drawImage(Loader.get(numberImagePath), this.x + 13*2, this.y + 103*2)
+            const numberImagePath = `../public/assets/part/number/${this.card.heal}${this.x3Option}.png`
+            ctx.drawImage(Loader.get(numberImagePath), this.x + 13*this.multiple, this.y + 103*this.multiple)
         } else {
-            const numberImagePath1 = `../public/assets/part/number/${Math.floor(this.card.heal/10)}.png`
-            const numberImagePath2 = `../public/assets/part/number/${this.card.heal%10}.png`
-            ctx.drawImage(Loader.get(numberImagePath1), this.x + 9*2, this.y + 103*2)
-            ctx.drawImage(Loader.get(numberImagePath2), this.x + 17*2, this.y + 103*2)
-        }
-        if(this.card.abilities.length !== 0) {
-            ctx.drawImage(Loader.get( `../public/assets/part/abilities/${this.card.abilities}.png`), this.x + 29*2, this.y + 104*2)
+            const numberImagePath1 = `../public/assets/part/number/${Math.floor(this.card.heal/10)}${this.x3Option}.png`
+            const numberImagePath2 = `../public/assets/part/number/${this.card.heal%10}${this.x3Option}.png`
+            ctx.drawImage(Loader.get(numberImagePath1), this.x + 9*this.multiple, this.y + 103*this.multiple)
+            ctx.drawImage(Loader.get(numberImagePath2), this.x + 17*this.multiple, this.y + 103*this.multiple)
         }
         
+    }
+    public save() {
+        this.savedPos.x = this.x
+        this.savedPos.y = this.y
     }
     public attack(isPlayerTurn: boolean) {
         this.isAttacking = true

@@ -1,11 +1,23 @@
 {
     "bird": {
-        "name": "bird",
+        "id": "bird",
+        "name": "새",
         "type": 1,
         "sacrifice": [],
-        "attack": 5,
+        "attack": 1,
         "defence": 1,
         "health": 1,
-        "abilities": ""
+        "abilities": {
+            "passive": {
+                "id": "none",
+                "name": "",
+                "desc": ""
+            },
+            "active": {
+                "id": "flyAttack",
+                "name": "날아올라",
+                "desc": "필드에 상관없이 상대방에게 직접공격을 한다."
+            }
+        }
     }
 }

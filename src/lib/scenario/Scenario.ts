@@ -5,7 +5,7 @@ const playerContainer = document.getElementById("player-container")!
 const cardInfo = document.getElementById("card-info")!
 const scenarioContainer = document.getElementById("scenario-container")!
 const body = document.body
-export class Scenario {
+export class Scenario { // TODO
     private static isScenarioOn = false
     static async on() {
         if(!this.isScenarioOn) {
@@ -24,6 +24,7 @@ export class Scenario {
     }
     static async off() {
         if(this.isScenarioOn) {
+            World.start()
             scenarioContainer.classList.add("scenario-off")
             scenarioContainer.classList.remove("scenario-on")
             await Wait(0.1)

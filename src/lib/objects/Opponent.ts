@@ -8,7 +8,7 @@ export class Opponent {
         this.name = name
     }
     public addToHand(card: Card) {
-        this.hand.set(card.cardID, card)
+        this.hand.set(card.uid, card)
     }
     public addToDeck(card: Card) {
         this.deck.set(this.deck.size, card)

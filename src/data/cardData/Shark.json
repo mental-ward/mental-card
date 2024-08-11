@@ -1,11 +1,23 @@
 {
     "shark": {
-        "name": "shark",
+        "id": "shark",
+        "name": "상어",
         "type": 3,
         "sacrifice": [3, 3, 3],
         "attack": 5,
         "defence": 3,
         "health": 5,
-        "abilities": ""
+        "abilities": {
+            "passive": {
+                "id": "none",
+                "name": "",
+                "desc": ""
+            },
+            "active": {
+                "id": "none",
+                "name": "",
+                "desc": ""
+            }
+        }
     }
 }

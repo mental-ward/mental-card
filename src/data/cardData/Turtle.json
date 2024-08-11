@@ -1,6 +1,7 @@
 {
     "turtle": {
-        "name": "turtle",
+        "id": "turtle",
+        "name": "거부븨",
         "type": 3,
         "sacrifice": [0, 0, 0],
         "attack": 2,
